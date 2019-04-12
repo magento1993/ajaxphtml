@@ -34,11 +34,6 @@ class Post extends \Magento\Framework\App\Action\Action
 
     public function execute()
     {
-        $post = $this->getRequest()->getPostValue();
-
-    echo "<pre>";
-    print_r($post);
-    exit;
         $height = $this->getRequest()->getParam('height');
         $weight = $this->getRequest()->getParam('weight');
         $result = $this->resultJsonFactory->create();
@@ -47,8 +42,8 @@ class Post extends \Magento\Framework\App\Action\Action
         $block = $resultPage->getLayout()
                 ->createBlock('Biren\Controllerphtml\Block\Index\Index')
                 ->setTemplate('Biren_Controllerphtml::result.phtml')
-                // ->setData('height',$height)
-                // ->setData('weight',$weight)
+                ->setData('height',$height)
+                ->setData('weight',$weight)
                 ->toHtml();
 
         $result->setData(['output' => $block]);
