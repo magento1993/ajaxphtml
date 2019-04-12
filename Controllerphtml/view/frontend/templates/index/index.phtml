@@ -1,0 +1,35 @@
+<div class="row clearfix">
+        <div class="col-md-12 column">
+            <form name="form_height" method="POST" id="form_height">
+                    <input type="text" name="height" class="form-control input-md">
+                    <input type="text" name="weight" class="form-control input-md">
+                    <input type="submit" id="calculateTotalSubmit"  name="calculate-total-submit" value="Calculate Total">
+                </div> 
+            </form>
+        </div>
+    </div>
+<div class="collection_pr">
+</div>
+
+<script>
+require(['jquery'],function($){
+        $("#form_height").submit(function(){
+            var heightValue = $("input[name='height']").val();
+            var weightValue = $("input[name='weight']").val();
+
+            var url = "<?php echo $block->getBaseUrl().'cntrlphtml/index/post/' ?>";
+            $.ajax({
+            url: url,
+            type: "POST",
+            data: {height:heightValue,weight:weightValue},
+            showLoader: true,
+            cache: false,
+            success: function(data){
+                console.log(data.output);
+                $('.collection_pr').html(data.output);
+            }
+        });
+        return false;
+        });
+});
+</script>
